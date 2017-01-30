@@ -67,20 +67,28 @@ class Spoqa(Style):
 
 class TestCase(unittest.TestCase):
 
+    def assert_error_codes(self, expected_error_codes, filename, code):
+        tree = ast.parse(code, filename or '<stdin>')
+        checker = ImportOrderChecker(filename, tree)
+        checker.lines = code.splitlines(True)
+        checker.options = {
+            'application_import_names': ['spoqa', 'tests'],
+            'import_order_style': lookup_entry_point('spoqa'),
+        }
+        actual_error_codes = frozenset(error.code
+                                       for error in checker.check_order())
+        self.assertEquals(frozenset(expected_error_codes), actual_error_codes)
+
+    def test_itself(self):
+        with open(__file__) as f:
+            code = f.read()
+        self.assert_error_codes([], __file__, code)
+
     def make_test(expected_error_codes, code):
         def test_func(self):
-            data = textwrap.dedent(code)
-            tree = ast.parse(data, '<stdin>')
-            checker = ImportOrderChecker(None, tree)
-            checker.lines = data.splitlines(True)
-            checker.options = {
-                'application_import_names': ['spoqa', 'tests'],
-                'import_order_style': lookup_entry_point('spoqa'),
-            }
-            actual_error_codes = frozenset(error.code
-                                           for error in checker.check_order())
-            self.assertEquals(frozenset(expected_error_codes),
-                              actual_error_codes)
+            self.assert_error_codes(expected_error_codes,
+                                    None,
+                                    textwrap.dedent(code))
         return test_func
 
     test_valid_1 = make_test([], '''
