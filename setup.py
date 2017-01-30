@@ -1,10 +1,21 @@
+import os.path
+
 from setuptools import setup
+
+
+def readme():
+    try:
+        with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as f:
+            return f.read()
+    except (IOError, OSError):
+        pass
 
 
 setup(
     name='flake8-import-order-spoqa',
     version='1.0.0',
     description="Spoqa's import order style for flake8-import-order",
+    long_description=readme(),
     url='https://github.com/spoqa/flake8-import-order-spoqa',
     author='Hong Minhee',
     author_email='hong.minhee' '@' 'gmail.com',
