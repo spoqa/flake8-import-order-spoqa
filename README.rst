@@ -68,8 +68,13 @@ file as well:
    [flake8]
    import-order-style = spoqa
 
+Because `runtime extensible styles`__ is introduced__ from
+flake-import-order 0.12, you need to install flake-import-order 0.12 or later.
+
 .. _pip: http://pip-installer.org/
 .. _config: http://flake8.pycqa.org/en/latest/user/configuration.html
+__ https://github.com/PyCQA/flake8-import-order#extending-styles
+__ https://github.com/PyCQA/flake8-import-order/pull/103
 
 
 Distribution
@@ -79,3 +84,12 @@ Written by `Hong Minhee`__, and distributed under GPLv3_ or later.
 
 __ https://hongminhee.org/
 .. _GPLv3: https://www.gnu.org/licenses/gpl-3.0.html
+
+
+Changelog
+---------
+
+Version 1.0.0
+~~~~~~~~~~~~~
+
+Initial release.  Released February 12, 2017.
