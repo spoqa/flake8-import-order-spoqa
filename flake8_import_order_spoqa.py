@@ -13,6 +13,8 @@ __all__ = 'Spoqa',
 
 class Spoqa(Style):
 
+    from_importable_standard_librarires = frozenset(['typing'])
+
     @staticmethod
     def name_key(identifier):
         name = identifier.lstrip('_')
@@ -46,7 +48,8 @@ class Spoqa(Style):
     def check(self):
         for i in self.imports:
             mod = i.modules[0]
-            if i.type == IMPORT_STDLIB and i.is_from:
+            if i.type == IMPORT_STDLIB and i.is_from and \
+               mod not in self.from_importable_standard_librarires:
                 yield Error(i.lineno, 'I901',
                             'A standard library is imported using '
                             '"from {0} import ..." statement. Should be '
@@ -94,6 +97,7 @@ class TestCase(unittest.TestCase):
     test_valid_1 = make_test([], '''
         import datetime
         import sys
+        from typing import Optional
 
         from pkg_resources import (SOURCE_DIST, EntryPoint, Requirement,
                                    get_provider)
@@ -127,6 +131,19 @@ class TestCase(unittest.TestCase):
     test_standard_libraries_must_not_be_from_import = make_test(['I901'], '''
         from sys import argv
     ''')
+
+    test_typing_is_only_exception_able_to_be_from_import = make_test([], '''
+        import typing
+        from typing import Sequence
+    ''')
+
+    test_import_typing_must_be_former_than_from_typing = make_test(
+        ['I100'],
+        '''
+        from typing import Sequence
+        import typing
+        '''
+    )
 
     test_3rd_parties_must_be_from_import = make_test(['I902'], '''
         import pkg_resources

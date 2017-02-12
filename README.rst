@@ -21,6 +21,14 @@ It bascially follows PEP 8 with our some additional rules:
 
       from sys import version_info  # No
 
+   However, there are few exceptions like ``typing`` module.  They can be
+   imported in both ways:
+
+   .. code-block:: python
+
+      import typing
+      from typing import Optional  # `from ... import ...` must be latter
+
 -  All other than standard libraries should be imported using
    ``from ... import ...`` statement:
 
