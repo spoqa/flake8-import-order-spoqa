@@ -10,3 +10,12 @@ install: pip install tox-travis
 script:
 - tox
 - tox -e docs
+- '[[ "$TRAVIS_TAG" = "" ]] || [[ "$TRAVIS_TAG" = "$(python setup.py --version)" ]]'
+- |
+    if git show --format=%B --quiet "$TRAVIS_COMMIT_RANGE$TRAVIS_TAG" | grep '\[changelog skip\]' > /dev/null; then
+      echo "Skip changelog checker..."
+    elif [[ "$TRAVIS_TAG" != "" ]]; then
+      ! grep -i "to be released" README.rst
+    else
+      [[ "$(git diff --name-only "$TRAVIS_COMMIT_RANGE" | grep README\.rst)" != "" ]]
+    fi
