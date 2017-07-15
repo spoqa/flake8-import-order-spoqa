@@ -2,7 +2,7 @@ flake8-import-order-spoqa
 =========================
 
 .. image:: https://img.shields.io/pypi/v/flake8-import-order-spoqa.svg
-   :target: https://pypi.python.org/pypi/flake8-import-order-spoqa
+   :target: https://pypi.org/project/flake8-import-order-spoqa/
 
 .. image:: https://travis-ci.org/spoqa/flake8-import-order-spoqa.svg
    :target: https://travis-ci.org/spoqa/flake8-import-order-spoqa
@@ -92,7 +92,7 @@ Changelog
 Version 1.0.1
 ~~~~~~~~~~~~~
 
-To be released.
+Released on July 15, 2017.
 
 - Fixed a bug that wrong order of names (e.g. ``from ... import second, first``)
   had been not warned.
@@ -101,4 +101,4 @@ To be released.
 Version 1.0.0
 ~~~~~~~~~~~~~
 
-Initial release.  Released February 12, 2017.
+Initial release.  Released on February 12, 2017.
