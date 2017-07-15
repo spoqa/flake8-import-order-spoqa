@@ -20,13 +20,13 @@ class Spoqa(Style):
         name = identifier.lstrip('_')
         hidden = name != identifier
         if not name:
-            return 2, hidden
+            return 2, hidden, name
         elif name.isupper():
-            return 0, hidden  # constants e.g. CONSTANT_NAME
+            return 0, hidden, name  # constants e.g. CONSTANT_NAME
         elif name[0].isupper():
-            return 1, hidden  # classes e.g. ClassName
+            return 1, hidden, name  # classes e.g. ClassName
         else:
-            return 2, hidden  # normal variables e.g. normal_names
+            return 2, hidden, name  # normal variables e.g. normal_names
 
     @staticmethod
     def module_key(name):
@@ -104,9 +104,15 @@ class TestCase(unittest.TestCase):
 
         from ...deepest import a
         from ..deeper import b
-        from .a import this, that
-        from .z import This, That
+        from .a import that, this
+        from .z import That, This
         from spoqa import something
+    ''')
+
+    test_valid_2 = make_test([], '''
+        from typing import List, Optional
+
+        from spoqa import CONSTANT_NAME, TypeName, func_name, var_name
     ''')
 
     test_constants_must_be_former_than_classes = make_test(['I101'], '''
@@ -135,6 +141,14 @@ class TestCase(unittest.TestCase):
     test_typing_is_only_exception_able_to_be_from_import = make_test([], '''
         import typing
         from typing import Sequence
+    ''')
+
+    test_names_must_be_ordered_lexicographically = make_test(['I101'], '''
+        from spoqa import b, a
+    ''')
+
+    test_names_must_be_sorted = make_test(['I101'], '''
+        from spoqa import a, B, c
     ''')
 
     test_import_typing_must_be_former_than_from_typing = make_test(

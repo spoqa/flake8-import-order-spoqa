@@ -94,6 +94,9 @@ Version 1.0.1
 
 To be released.
 
+- Fixed a bug that wrong order of names (e.g. ``from ... import second, first``)
+  had been not warned.
+
 
 Version 1.0.0
 ~~~~~~~~~~~~~
