@@ -48,20 +48,19 @@ class Spoqa(Style):
     def check(self):
         for i in self.imports:
             mod = i.modules[0]
-            lineno = i.start_line if hasattr(i, 'start_line') else i.lineno
             if i.type == IMPORT_STDLIB and i.is_from and \
                mod not in self.from_importable_standard_librarires:
-                yield Error(lineno, 'I901',
+                yield Error(i.start_line, 'I901',
                             'A standard library is imported using '
                             '"from {0} import ..." statement. Should be '
                             '"import {0}" instead.'.format(mod))
             elif i.type == IMPORT_3RD_PARTY and not i.is_from:
-                yield Error(lineno, 'I902',
+                yield Error(i.start_line, 'I902',
                             'A third party library is imported using '
                             '"import {0}" statement. Should be '
                             '"from {0} import ..." instead.'.format(mod))
             elif i.type in (IMPORT_APP, IMPORT_APP_PACKAGE) and not i.is_from:
-                yield Error(lineno, 'I902',
+                yield Error(i.start_line, 'I902',
                             'An app module is imported using "import {0}"'
                             ' statement. Should be "from {0} import ..."'
                             ' instead.'.format(mod))
