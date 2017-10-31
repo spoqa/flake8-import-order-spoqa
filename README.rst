@@ -92,7 +92,7 @@ Changelog
 Version 1.1.0
 ~~~~~~~~~~~~~
 
-To be released.
+Released on October 31, 2017.
 
 - Older versions than flake8-import-order 0.14.2 are now unsupported.
 
