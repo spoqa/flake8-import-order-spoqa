@@ -94,6 +94,8 @@ Version 1.0.2
 
 To be released.
 
+- Fixed incompatibility with flake8-import-order 0.14.1 or higher.
+
 
 Version 1.0.1
 ~~~~~~~~~~~~~

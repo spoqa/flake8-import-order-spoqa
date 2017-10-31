@@ -48,19 +48,20 @@ class Spoqa(Style):
     def check(self):
         for i in self.imports:
             mod = i.modules[0]
+            lineno = i.start_line if hasattr(i, 'start_line') else i.lineno
             if i.type == IMPORT_STDLIB and i.is_from and \
                mod not in self.from_importable_standard_librarires:
-                yield Error(i.lineno, 'I901',
+                yield Error(lineno, 'I901',
                             'A standard library is imported using '
                             '"from {0} import ..." statement. Should be '
                             '"import {0}" instead.'.format(mod))
             elif i.type == IMPORT_3RD_PARTY and not i.is_from:
-                yield Error(i.lineno, 'I902',
+                yield Error(lineno, 'I902',
                             'A third party library is imported using '
                             '"import {0}" statement. Should be '
                             '"from {0} import ..." instead.'.format(mod))
             elif i.type in (IMPORT_APP, IMPORT_APP_PACKAGE) and not i.is_from:
-                yield Error(i.lineno, 'I902',
+                yield Error(lineno, 'I902',
                             'An app module is imported using "import {0}"'
                             ' statement. Should be "from {0} import ..."'
                             ' instead.'.format(mod))
@@ -71,7 +72,14 @@ class Spoqa(Style):
 class TestCase(unittest.TestCase):
 
     def assert_error_codes(self, expected_error_codes, filename, code):
-        tree = ast.parse(code, filename or '<stdin>')
+        try:
+            tree = ast.parse(code, filename or '<stdin>')
+        except TypeError as e:
+            raise TypeError(
+                '{0!s}\ncode = {1!r}\nfilename = {2!r}'.format(
+                    e, code, filename
+                )
+            )
         checker = ImportOrderChecker(filename, tree)
         checker.lines = code.splitlines(True)
         checker.options = {
