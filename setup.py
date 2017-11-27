@@ -23,7 +23,7 @@ setup(
     maintainer_email='dev' '@' 'spoqa.com',
     license='GPLv3 or later',
     py_modules=['flake8_import_order_spoqa'],
-    install_requires=['flake8-import-order >= 0.14.2'],
+    install_requires=['flake8-import-order >= 0.14.2, < 0.16'],
     entry_points='''
         [flake8_import_order.styles]
         spoqa = flake8_import_order_spoqa:Spoqa
