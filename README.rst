@@ -94,6 +94,11 @@ Version 1.2.0
 
 To be released.
 
+- Older versions than flake8-import-order 0.16 are now unsupported.
+  (Under the hood, since flake8-import-order 0.16 refactored their internals
+  so that no more ``Style.check()`` method and ``Style.imports`` property
+  exist, flake8-import-order-spoqa also became to follow that.)
+
 
 Version 1.1.0
 ~~~~~~~~~~~~~
