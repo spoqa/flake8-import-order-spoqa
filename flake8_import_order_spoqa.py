@@ -2,9 +2,7 @@ import ast
 import textwrap
 import unittest
 
-from flake8_import_order import (IMPORT_3RD_PARTY, IMPORT_APP,
-                                 IMPORT_APP_PACKAGE, IMPORT_APP_RELATIVE,
-                                 IMPORT_STDLIB)
+from flake8_import_order import ImportType
 from flake8_import_order.checker import ImportOrderChecker
 from flake8_import_order.styles import Error, Style, lookup_entry_point
 
@@ -41,9 +39,10 @@ class Spoqa(Style):
         modules = [cls.module_key(module) for module in import_.modules]
         names = [cls.name_key(name) for name in import_.names]
         group = import_.type
-        if group in (IMPORT_APP, IMPORT_APP_PACKAGE):
-            group += IMPORT_APP_RELATIVE
-        return group, -import_.level, modules, names
+        group_value = group.value
+        if group in (ImportType.APPLICATION, ImportType.APPLICATION_PACKAGE):
+            group_value += ImportType.APPLICATION_RELATIVE.value
+        return group_value, -import_.level, modules, names
 
     def _check(self, previous_import, previous, current_import):
         bases = super(Spoqa, self)._check(
@@ -57,18 +56,19 @@ class Spoqa(Style):
         type_ = current_import.type
         is_from = current_import.is_from
         lineno = current_import.lineno
-        if type_ == IMPORT_STDLIB and is_from and \
+        if type_ == ImportType.STDLIB and is_from and \
            mod not in self.from_importable_standard_librarires:
             yield Error(lineno, 'I901',
                         'A standard library is imported using '
                         '"from {0} import ..." statement. Should be '
                         '"import {0}" instead.'.format(mod))
-        elif type_ == IMPORT_3RD_PARTY and not is_from:
+        elif type_ == ImportType.THIRD_PARTY and not is_from:
             yield Error(lineno, 'I902',
                         'A third party library is imported using '
                         '"import {0}" statement. Should be '
                         '"from {0} import ..." instead.'.format(mod))
-        elif type_ in (IMPORT_APP, IMPORT_APP_PACKAGE) and not is_from:
+        elif type_ in (ImportType.APPLICATION,
+                       ImportType.APPLICATION_PACKAGE) and not is_from:
             yield Error(lineno, 'I902',
                         'An app module is imported using "import {0}"'
                         ' statement. Should be "from {0} import ..."'

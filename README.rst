@@ -94,6 +94,15 @@ Version 1.3.0
 
 To be released.
 
+- Older versions than flake8-import-order 0.17 are now unsupported.
+  (Under the hood, since flake8-import-order 0.17 refactored their internals
+  so that constants like ``IMPORT_3RD_PARTY``, ``IMPORT_APP``,
+  ``IMPORT_APP_PACKAGE``, ``IMPORT_APP_RELATIVE``, and ``IMPORT_STDLIB``
+  are evolved to ``ImportType`` enum type, flake8-import-order-spoqa also
+  became to follow that.)  [`#3`_]
+
+.. _#3: https://github.com/spoqa/flake8-import-order-spoqa/issues/3
+
 
 Version 1.2.0
 ~~~~~~~~~~~~~
