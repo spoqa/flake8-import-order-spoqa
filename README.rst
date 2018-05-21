@@ -92,7 +92,7 @@ Changelog
 Version 1.4.0
 ~~~~~~~~~~~~~
 
-To be released.
+Released on May 22, 2018.
 
 - Python 3.3 became no more supported.
 
