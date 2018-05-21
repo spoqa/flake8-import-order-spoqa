@@ -94,6 +94,8 @@ Version 1.4.0
 
 To be released.
 
+- Python 3.3 became no more supported.
+
 
 Version 1.3.0
 ~~~~~~~~~~~~~
