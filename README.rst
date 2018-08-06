@@ -89,6 +89,12 @@ __ https://hongminhee.org/
 Changelog
 ---------
 
+Version 1.4.2
+~~~~~~~~~~~~~
+
+To be released.
+
+
 Version 1.4.1
 ~~~~~~~~~~~~~
 
