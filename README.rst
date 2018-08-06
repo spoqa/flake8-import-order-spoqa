@@ -92,7 +92,7 @@ Changelog
 Version 1.4.1
 ~~~~~~~~~~~~~
 
-To be released.
+Released on Aug 06, 2018.
 
 - Python 3.7 can be supported by updating flake8-import-order to 0.18.
   See its changelog__ to know more about
