@@ -24,7 +24,7 @@ setup(
     license='GPLv3 or later',
     py_modules=['flake8_import_order_spoqa'],
     python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*',
-    install_requires=['flake8-import-order >= 0.17, < 0.18'],
+    install_requires=['flake8-import-order >= 0.18, < 0.19'],
     entry_points='''
         [flake8_import_order.styles]
         spoqa = flake8_import_order_spoqa:Spoqa
