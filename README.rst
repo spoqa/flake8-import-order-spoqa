@@ -94,6 +94,12 @@ Version 1.4.1
 
 To be released.
 
+- Python 3.7 can be supported by updating flake8-import-order to 0.18.
+  See its changelog__ to know more about
+  updates.
+
+__ https://github.com/PyCQA/flake8-import-order/blob/master/CHANGELOG.rst#018-2018-07-08
+
 
 Version 1.4.0
 ~~~~~~~~~~~~~
