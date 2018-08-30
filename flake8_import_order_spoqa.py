@@ -11,7 +11,7 @@ __all__ = 'Spoqa',
 
 class Spoqa(Style):
 
-    from_importable_standard_librarires = frozenset(['typing'])
+    from_importable_standard_librarires = frozenset(['dataclasses', 'typing'])
 
     @staticmethod
     def name_key(identifier):

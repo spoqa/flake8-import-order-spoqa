@@ -94,6 +94,9 @@ Version 1.5.0
 
 To be released.
 
+- The ``dataclasses`` module, like ``typing``, now can be imported without
+  a qualifier (e.g., ``from dataclasses import ...``).
+
 
 Version 1.4.1
 ~~~~~~~~~~~~~
