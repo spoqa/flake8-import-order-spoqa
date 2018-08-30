@@ -92,7 +92,7 @@ Changelog
 Version 1.5.0
 ~~~~~~~~~~~~~
 
-To be released.
+Released on August 31, 2018.
 
 - The ``dataclasses`` module, like ``typing``, now can be imported without
   a qualifier (e.g., ``from dataclasses import ...``).
@@ -101,7 +101,7 @@ To be released.
 Version 1.4.1
 ~~~~~~~~~~~~~
 
-Released on Aug 06, 2018.
+Released on August 6, 2018.
 
 - Python 3.7 can be supported by updating flake8-import-order to 0.18.
   See its changelog__ to know more about
