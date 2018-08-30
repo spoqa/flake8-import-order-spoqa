@@ -13,7 +13,7 @@ def readme():
 
 setup(
     name='flake8-import-order-spoqa',
-    version='1.4.2',
+    version='1.5.0',
     description="Spoqa's import order style for flake8-import-order",
     long_description=readme(),
     url='https://github.com/spoqa/flake8-import-order-spoqa',
